@@ -51,12 +51,17 @@
 % exports
 -export([increment/1,increment/2,increment/3,
          decrement/1, decrement/2, decrement/3,
+         leo_increment/1,
          timing/2, timing/3,
          gauge/2]).
 
 %
 % API functions
 %
+
+leo_increment(Suffix) ->
+  {ok, CHostname} = inet:gethostname(),
+  increment(list_to_atom("leofs." ++ CHostname ++ "." ++ Suffix)).
 
 % functions for incrementing counters
 increment(Stat) -> increment(Stat, 1, 1.0).
